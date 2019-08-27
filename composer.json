@@ -29,7 +29,7 @@
     },
     "autoload": {
         "psr-4": {
-            "x51\\bitrix\\module\\recaptchav3": "module//classes//"
+            "x51\\bitrix\\module\\recaptchav3\\": "module//classes//"
         }
     }
 }

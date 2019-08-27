@@ -1,0 +1,35 @@
+{
+    "name": "quanzo/bitrix-recaptchav3",
+    "description": "Invisible recpatcha for bitrix",
+	"version": "1.0.0",
+    "authors": [
+        {
+            "name": "Quanzo",
+            "email": "iquanzo@gmail.com"
+        }
+    ],
+    "keywords": [
+        "bitrix",
+        "recaptcha"
+    ],
+    "type": "library",
+    "license": "MIT",
+	"scripts": {
+		post-package-install: [
+			"x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::postPackageInstall"
+		],
+		post-package-uninstall: [
+			"x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::postPackageUninstall"
+		],
+		test: ""x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::test"
+	}
+    "require": {
+        "php": ">=7.0",
+		"google/recaptcha": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "x51\\bitrix\\module\\recaptchav3": "module//classes//"
+        }
+    }
+}

@@ -21,7 +21,6 @@
 		"post-package-uninstall": [
 			"x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::postPackageUninstall"
 		],
-		"test": "x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::test"
 	},
     "require": {
         "php": ">=7.0",

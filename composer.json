@@ -30,5 +30,8 @@
         "psr-4": {
             "x51\\bitrix\\module\\recaptchav3\\": "module//classes//"
         }
-    }
+    },
+	"extra": {
+		
+	}
 }

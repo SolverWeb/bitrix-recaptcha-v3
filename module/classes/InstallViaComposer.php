@@ -7,36 +7,45 @@ class InstallViaComposer{
 	protected static $bxName = 'x51.recaptchav3';
 	
 	static public function postPackageInstall(/*PackageEvent */$event) {
-		echo "Install module bitrix-racaptcha-v3\n";
-		$modulesDir = static::checkBxModulesDir($event->getComposer()->getPackage());
-		$bxModuleDir = realpath(__DIR__.'/../');
 		
-		$slPath = $modulesDir.'/'.static::$bxName;
+		$package = $event->getOperation()->getPackage();
+		if ($package->getName() == 'quanzo/bitrix-recaptcha-v3') {
+			echo "Install module bitrix-racaptcha-v3\n";
+			$modulesDir = static::checkBxModulesDir($event->getComposer()->getPackage());
+			$bxModuleDir = realpath(__DIR__.'/../');		
+			$slPath = $modulesDir.'/'.static::$bxName;
 		
-		if (file_exists($slPath) && is_link($slPath)) {
-			@unlink($slPath);
-		}
+			if (file_exists($slPath) && is_link($slPath)) {
+				@unlink($slPath);
+			}
 		
-		if (!file_exists($slPath)) {
-			//echo $bxModuleDir."\n".$slPath."\n";
-			//$d = getcwd();
-			chdir($modulesDir);
-			symlink($bxModuleDir, static::$bxName);
-			//chdir($d);
-		} else {
-			echo "Error. Found dir {static::$bxName}\n";
+			if (!file_exists($slPath)) {
+				chdir($modulesDir);
+				symlink($bxModuleDir, static::$bxName);
+			} else {
+				echo "Error. Found dir {static::$bxName}\n";
+			}
 		}
 	} // end postPackageInstall
 	
-	static public function postPackageUninstall(/*PackageEvent */$event) {
-		echo "Uninstall module bitrix-racaptcha-v3\n";
-		$modulesDir = static::checkBxModulesDir($event->getComposer()->getPackage());
-		$slPath = $modulesDir.'/'.static::$bxName;
-		if (file_exists($slPath) && is_link($slPath)) {
-			@unlink($slPath);
+	static public function prePackageUninstall(/*PackageEvent */$event) {
+		$package = $event->getOperation()->getPackage();
+		if ($package->getName() == 'quanzo/bitrix-recaptcha-v3') {
+			echo "Uninstall module bitrix-recaptcha-v3\n";
+			$modulesDir = static::checkBxModulesDir($package);
+			$slPath = $modulesDir.'/'.static::$bxName;
+			if (file_exists($slPath) && is_link($slPath)) {
+				@unlink($slPath);
+			}
 		}
-		
 	} // end postPackageUninstall\
+	
+	static public function test($event) {
+		echo $event->getComposer()->getPackage()->getName()."\n";
+		echo $event->getComposer()->getPackage()->getPrettyName()."\n";
+		echo print_r($event->getComposer()->getPackage()->getExtra(), true)."\n";
+		echo static::checkBxModulesDir($event->getComposer()->getPackage())."\n";
+	}
 	
 	static protected function checkBxModulesDir($package) {
 		$arPackExtra = $package->getExtra();
@@ -47,6 +56,10 @@ class InstallViaComposer{
 		}
 		if (!$modulesDir && isset($arPackExtra['documentRootDir'])) {
 			$p = realpath($arPackExtra['documentRootDir']).'/bitrix/modules';
+			$modulesDir = is_dir($p) ? $p : '';
+		}
+		if (!$modulesDir && isset($arPackExtra['docRoot'])) {
+			$p = realpath($arPackExtra['docRoot']).'/bitrix/modules';
 			$modulesDir = is_dir($p) ? $p : '';
 		}
 	

@@ -25,7 +25,7 @@ x51.recaptchav3 - модуль для битрикс - поддержка Google
         "x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::postPackageInstall"
     ],
     "pre-package-uninstall": [
-        x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::postPackageUninstall"
+        x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::prePackageUninstall"
     ]
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

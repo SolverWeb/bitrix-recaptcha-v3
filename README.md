@@ -10,9 +10,52 @@ x51.recaptchav3 - модуль для битрикс - поддержка Google
 Установка
 ---------
 
-Скопировать в папку `/bitrix/modules/x51.recaptchav3/`
+Скопировать в папку *module* в `/bitrix/modules/x51.recaptchav3/`
 
- 
+### Composer
+
+Добавить в *composer.json* приложения
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"require": {
+    "quanzo/bitrix-recaptcha-v3": "*"
+},
+"scripts": {
+    "post-package-install": [
+        "x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::postPackageInstall"
+    ],
+    "pre-package-uninstall": [
+        x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::postPackageUninstall"
+    ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+При установке, будет скачан пакет и появится символическая ссылка на модуль в
+папке bitrix/modules
+
+В адиминстративной панели битрикса модуль надо активировать обычным порядком.
+
+При удалении, символическая ссылка будет убрана. Записи в scripts надо удалить
+вручную уже после удаления пакета.
+
+Если папка vendor находится вне bitrix, то необходимо дописать
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"require": {
+    "quanzo/bitrix-recaptcha-v3": "*"
+},
+"extra": {
+    "documentRoot": "/var/www/site/public_html"
+},
+"scripts": {
+    "post-package-install": [
+        "x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::postPackageInstall"
+    ],
+    "pre-package-uninstall": [
+        x51\\bitrix\\module\\recaptchav3\\InstallViaComposer::prePackageUninstall"
+    ]
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Настройки модуля
 ----------------
@@ -43,7 +86,7 @@ x51.recaptchav3 - модуль для битрикс - поддержка Google
 -   Запрашивается токен пользователя
 
 -   Отправляется запрос на сервер, к модулю. Затем модуль, по токену, получает
-    оценку пользователя  от recaptcha.
+    оценку пользователя от recaptcha.
 
 -   Возвращает 1 - если пользователь, и 0 - если бот. Для оценки используется
     настройка модуля.

@@ -38,14 +38,7 @@ class InstallViaComposer{
 				@unlink($slPath);
 			}
 		}
-	} // end postPackageUninstall\
-	
-	static public function test($event) {
-		echo $event->getComposer()->getPackage()->getName()."\n";
-		echo $event->getComposer()->getPackage()->getPrettyName()."\n";
-		echo print_r($event->getComposer()->getPackage()->getExtra(), true)."\n";
-		echo static::checkBxModulesDir($event->getComposer()->getPackage())."\n";
-	}
+	} // end postPackageUninstall\	
 	
 	static protected function checkBxModulesDir($package) {
 		$arPackExtra = $package->getExtra();

@@ -47,6 +47,7 @@ class InstallViaComposer{
             isset($arPackExtra['docRoot']) ? $arPackExtra['docRoot'] :
             isset($arPackExtra['documentRoot']) ? $arPackExtra['documentRoot'] : '';
 
+        echo "\nPath: {$path}\n";
         if (isset($arPackExtra['modulesDir'])) {
             $p = realpath($arPackExtra['modulesDir']);
             $modulesDir = is_dir($p) ? $p : '';

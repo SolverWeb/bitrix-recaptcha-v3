@@ -38,18 +38,19 @@ class InstallViaComposer{
                 @unlink($slPath);
             }
         }
-    } // end postPackageUninstall\
+    }
 
     static protected function checkBxModulesDir($package) {
         $arPackExtra = $package->getExtra();
         $modulesDir = '';
         $path = isset($arPackExtra['documentRootDir']) ? $arPackExtra['documentRootDir'] :
-            isset($arPackExtra['docRoot']) ? $arPackExtra['docRoot'] : $arPackExtra['documentRoot'];
+            isset($arPackExtra['docRoot']) ? $arPackExtra['docRoot'] :
+            isset($arPackExtra['documentRoot']) ? $arPackExtra['documentRoot'] : '';
 
         if (isset($arPackExtra['modulesDir'])) {
             $p = realpath($arPackExtra['modulesDir']);
             $modulesDir = is_dir($p) ? $p : '';
-        } else if (!$modulesDir && isset($path)) {
+        } else if (!$modulesDir && $path !== '') {
             $p = realpath($path).'/bitrix/modules';
             $modulesDir = is_dir($p) ? $p : '';
         } else if (!$modulesDir) {
@@ -60,5 +61,4 @@ class InstallViaComposer{
         echo "\nPath: {$modulesDir}\n";
         return $modulesDir;
     }
-
 }

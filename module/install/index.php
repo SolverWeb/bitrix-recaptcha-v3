@@ -14,7 +14,7 @@ class x51_recaptchav3 extends \CModule {
 	public $MODULE_VERSION;
 	public $MODULE_VERSION_DATE;
 	public $MODULE_NAME;
-	public $MODULE_DESCRIPTION='œÓ‰‰ÂÊÍ‡ recaptcha v3';
+	public $MODULE_DESCRIPTION='–ü–æ–¥–¥–µ—Ä–∂–∫–∞ recaptcha v3';
 	public $MODULE_CSS;
 	public $MODULE_GROUP_RIGHTS = "Y";
 
@@ -68,7 +68,7 @@ class x51_recaptchav3 extends \CModule {
 		$keyGoodDB = $this->InstallDB();
 		$keyGoodEvents = $this->InstallEvents();
 		$keyGoodPublic = $this->InstallPublic();
-		$APPLICATION->IncludeAdminFile('”ÒÚ‡ÌÓ‚Í‡', __DIR__."/install.php");
+		$APPLICATION->IncludeAdminFile('–£—Å—Ç–∞–Ω–æ–≤–∫–∞', __DIR__."/install.php");
     }
 
 	// UNINSTALL
@@ -103,6 +103,6 @@ class x51_recaptchav3 extends \CModule {
 		$keyGoodDB = $this->UnInstallDB();
 		$keyGoodEvents = $this->UnInstallEvents();
 		$keyGoodPublic = $this->UnInstallPublic();
-		$APPLICATION->IncludeAdminFile('”‰‡ÎÂÌËÂ ÏÓ‰ÛÎˇ', __DIR__."/uninstall.php");
+		$APPLICATION->IncludeAdminFile('–£–¥–∞–ª–µ–Ω–∏–µ –º–æ–¥—É–ª—è', __DIR__."/uninstall.php");
     }
 }

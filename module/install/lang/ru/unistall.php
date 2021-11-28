@@ -1,3 +1,3 @@
 <?php
-$MESS['X51.MOD_UNINST_OK']='Ìîóäëü óäàëåí';
-$MESS['X51.MOD_BACK']='Íàçàä';
+$MESS['X51.MOD_UNINST_OK']='ÐœÐ¾ÑƒÐ´Ð»ÑŒ ÑƒÐ´Ð°Ð»ÐµÐ½';
+$MESS['X51.MOD_BACK']='ÐÐ°Ð·Ð°Ð´';

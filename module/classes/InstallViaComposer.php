@@ -43,23 +43,19 @@ class InstallViaComposer{
 	static protected function checkBxModulesDir($package) {
 		$arPackExtra = $package->getExtra();
 		$modulesDir = '';
+		$path = $arPackExtra['documentRootDir'] ? : $arPackExtra['docRoot'] ? : $arPackExtra['documentRoot'];
+		
 		if (isset($arPackExtra['modulesDir'])) {
 			$p = realpath($arPackExtra['modulesDir']);
 			$modulesDir = is_dir($p) ? $p : '';
-		}
-		if (!$modulesDir && isset($arPackExtra['documentRootDir'])) {
-			$p = realpath($arPackExtra['documentRootDir']).'/bitrix/modules';
+		} else if (!$modulesDir && isset($path)) {
+			$p = realpath($path).'/bitrix/modules';
+			$modulesDir = is_dir($p) ? $p : '';
+		} else if (!$modulesDir) {
+			$p = realpath(__DIR__.'/../../../../../../modules');
 			$modulesDir = is_dir($p) ? $p : '';
 		}
-		if (!$modulesDir && isset($arPackExtra['docRoot'])) {
-			$p = realpath($arPackExtra['docRoot']).'/bitrix/modules';
-			$modulesDir = is_dir($p) ? $p : '';
-		}
-	
-		if (!$modulesDir) {
-			$p = realpath(__DIR__.'/../../../../../modules');
-			$modulesDir = is_dir($p) ? $p : '';
-		}
+		
 		return $modulesDir;
 	}	
 	
